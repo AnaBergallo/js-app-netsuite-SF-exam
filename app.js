@@ -1830,15 +1830,8 @@ var quizApp = function () {
     this.checkAnswer = function (option) {
         var answer = quiz.JS[this.currentque].answer;
         var result;
-        console.log("Answer: " + answer);
+        console.log("Correct answer/s: " + answer);
         // console.log("OP selected: " + option); selected
-
-        // option = option.replace(/</g, "&lt;");
-        // option = option.replace(/>/g, "&gt;");
-        // option = option.replace(/"/g, "&quot;");
-        console.log("OP selected: " + option);
-
-        console.log("index of op selected: " + quiz.JS[this.currentque].answer.indexOf(option));
 
         if (quiz.JS[this.currentque].answer.indexOf(option) > -1) {
             if (quiz.JS[this.currentque].score == "") {
@@ -1854,9 +1847,7 @@ var quizApp = function () {
     }
 
     this.changeQuestion = function (cque) {
-        console.log(this.currentque);
         this.currentque = this.currentque + cque;
-        console.log(this.currentque);
         this.displayQuiz(this.currentque);
     }
 }
@@ -1873,7 +1864,6 @@ $(document).ready(function () {
 $('#next').click(function (e) {
     e.preventDefault();
     let result;
-    console.log("selected: " + selectedopt);
     if (selectedopt) {
         result = jsq.checkAnswer(selectedopt);
         selectedopt = null;
