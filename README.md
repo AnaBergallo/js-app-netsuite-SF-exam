@@ -1,8 +1,8 @@
 # js-app-netsuite-SF-exam
 -------------------------------------------------------------------------------------------------------------
 Pendiente:
-- desordenar las preguntas
-- aceptar mas de una respuesta para las que son de seleccion multiple. 
+[x] desordenar las preguntas: done, comentar la linea 1176 si no se quiere desordenado.
+[ ] aceptar mas de una respuesta para las que son de seleccion multiple: pendiente
 
 -------------------------------------------------------------------------------------------------------------
 Como usarlo:
