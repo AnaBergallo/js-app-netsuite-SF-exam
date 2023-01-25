@@ -677,7 +677,7 @@ var quiz = {
                     "d": "Edit their quota to override their sales forecast. "
                 }
             ],
-            "answer": "Adjust the probability and status of opportunities in the forecast. .",
+            "answer": "Adjust the probability and status of opportunities in the forecast.",
             "score": 0,
             "status": ""
         },
@@ -1776,6 +1776,7 @@ var quizApp = function () {
     this.score = 0;
     this.qno = 1;
     this.currentque = 0;
+    this.contador = 0;
     var totalque = quiz.JS.length;
     this.displayQuiz = function (cque) {
         this.currentque = cque;
@@ -1801,7 +1802,10 @@ var quizApp = function () {
         if (this.currentque <= 0) {
             $("#previous").attr("disabled", true);
         }
-        if (this.currentque >= totalque) {
+        console.log(`this.contador: ${this.contador} `);
+        console.log(`totalque: ${totalque} `);
+
+        if (this.contador == totalque) {
             $('#next').attr('disabled', true);
             for (var i = 0; i < totalque; i++) {
                 this.score = this.score + quiz.JS[i].score;
@@ -1831,7 +1835,6 @@ var quizApp = function () {
         var answer = quiz.JS[this.currentque].answer;
         var result;
         console.log("Correct answer/s: " + answer);
-        // console.log("OP selected: " + option); selected
 
         if (quiz.JS[this.currentque].answer.indexOf(option) > -1) {
             if (quiz.JS[this.currentque].score == "") {
@@ -1847,12 +1850,19 @@ var quizApp = function () {
     }
 
     this.changeQuestion = function (cque) {
-        this.currentque = this.currentque + cque;
+        var next = this.currentque + cque;
+        if (next > totalque) {
+            next = next - totalque;
+            console.log(`next -- : ${next} `);
+        }
+        this.currentque = next;
+        this.contador++;
         this.displayQuiz(this.currentque);
     }
 }
 var jsq = new quizApp();
 var selectedopt;
+var step = 31;
 $(document).ready(function () {
     jsq.displayQuiz(0);
     $('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
@@ -1869,7 +1879,7 @@ $('#next').click(function (e) {
         selectedopt = null;
     }
     if (result)
-        jsq.changeQuestion(1);
+        jsq.changeQuestion(step);
 });
 $("#question-options").keypress(function (event) {
     if (event.key === "Enter") {
@@ -1878,5 +1888,5 @@ $("#question-options").keypress(function (event) {
 });
 $('#previous').click(function (e) {
     e.preventDefault();
-    jsq.changeQuestion(-1);
+    jsq.changeQuestion(-step);
 });
