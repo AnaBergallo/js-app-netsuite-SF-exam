@@ -1871,10 +1871,12 @@ $('#next').click(function (e) {
     if (result)
         jsq.changeQuestion(1);
 });
+$("#question-options").keypress(function (event) {
+    if (event.key === "Enter") {
+        $("#next").click();
+    }
+});
 $('#previous').click(function (e) {
     e.preventDefault();
-    // if (selectedopt) {
-    //     jsq.checkAnswer(selectedopt);
-    // }
     jsq.changeQuestion(-1);
 });
