@@ -1772,6 +1772,9 @@ var quiz = {
         }
     ]
 }
+
+quiz["JS"] = quiz["JS"].sort((a, b) => 0.5 - Math.random())
+
 var quizApp = function () {
     this.score = 0;
     this.qno = 1;
